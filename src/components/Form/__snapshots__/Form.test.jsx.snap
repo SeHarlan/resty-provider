@@ -4,21 +4,18 @@ exports[`Form component renders Form 1`] = `
 <ContextProvider
   value={
     Object {
-      "bearerToken": "",
-      "handleBearerTokenChange": [Function],
-      "handleJsonChange": [Function],
-      "handleNameChange": [Function],
-      "handleOptionChange": [Function],
-      "handlePasswordChange": [Function],
-      "handleSubmit": [Function],
-      "handleUrlChange": [Function],
-      "history": Array [],
-      "json": "",
-      "name": "",
-      "password": "",
-      "result": Array [],
-      "selectedOption": "GET",
-      "url": "",
+      "dispatch": [Function],
+      "state": Object {
+        "bearerToken": "",
+        "fetchData": null,
+        "history": Array [],
+        "json": "",
+        "name": "",
+        "password": "",
+        "result": Array [],
+        "selectedOption": "GET",
+        "url": "",
+      },
     }
   }
 >

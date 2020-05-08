@@ -1,72 +1,65 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
 import { customFetch } from './services/custom';
 
 const RestyContext = createContext();
 
+const initialState = {
+  selectedOption: 'GET',
+  json: '',
+  url: '',
+  name: '',
+  password: '',
+  bearerToken: '',
+  history: [],
+  fetchData: null,
+  result: []
+};
+function reducer(state, action) {
+  switch(action.type) {
+    case 'setSelectedOption':
+      return { ...state, selectedOption: action.payload };
+    case 'setJson':
+      return { ...state, json: action.payload };
+    case 'setUrl': 
+      return { ...state, url: action.payload };
+    case 'setName':
+      return { ...state, name: action.payload };
+    case 'setPassword':
+      return { ...state, password: action.payload };
+    case 'setBearerToken':
+      return { ...state, bearerToken: action.payload };
+    case 'setHistory':
+      return { ...state, history: [...state.history, action.payload] };
+    case 'setFetchData': 
+      return { ...state, fetchData: action.payload };
+    case 'setResult':
+      return { ...state, result: action.payload };
+    default:
+      return state;
+  }
+}
+
 const RestyProvider = ({ children }) => {
-  const [selectedOption, setSelectedOption] = useState('GET');
-  const [json, setJson] = useState('');
-  const [url, setUrl] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [bearerToken, setBearerToken] = useState('');
-  const [history, setHistory] = useState([]);
-  const [fetchData, setFetchData] = useState(null);
-  const [result, setResult] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { fetchData } = state;
 
   useEffect(() => {
     if(!fetchData) return; 
-    setResult(['...Loading (or Nothing Found)']);
+    dispatch({ type: 'setResult', payload: ['...Loading (or Nothing Found)'] });
     customFetch(fetchData).then(res => {
       if(res === []) {
-        setResult(['No Results Found']);
+        dispatch({ type: 'setResult', payload: ['No Results Found'] });
       } else {
-        setResult(res);
-        setHistory(prev => [...prev, fetchData]);
+        dispatch({ type: 'setResult', payload: res });
+        dispatch({ type: 'setHistory', payload: fetchData });
       }
     });
   }, [fetchData]);
 
-  
-
-  const handleJsonChange = ({ target }) => setJson(target.value);
-  const handleUrlChange = ({ target }) => setUrl(target.value);
-  const handleOptionChange = ({ target }) => setSelectedOption(target.value);
-  const handleNameChange = ({ target }) => setName(target.value);
-  const handlePasswordChange = ({ target }) => setPassword(target.value);
-  const handleBearerTokenChange = ({ target }) => setBearerToken(target.value);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFetchData({
-      url: url,
-      method: selectedOption,
-      json: json,
-      username: name,
-      password: password,
-      bearerToken: bearerToken
-    });
-  };
   return (
-    <RestyContext.Provider value={{
-      url,
-      json,
-      password,
-      name,
-      bearerToken,
-      selectedOption,
-      history,
-      result,
-      handleSubmit,
-      handleOptionChange,
-      handleUrlChange,
-      handleJsonChange,
-      handleBearerTokenChange,
-      handlePasswordChange,
-      handleNameChange
-    }}>
+    <RestyContext.Provider value={{ state, dispatch }}>
       {children}
     </RestyContext.Provider>
   );
@@ -79,6 +72,30 @@ RestyProvider.propTypes = {
 export default RestyProvider;
 
 export const useGlobalState = () => {
-  const state = useContext(RestyContext);
+  const { state } = useContext(RestyContext);
   return state;
 };
+export const useDispatch = () => {
+  const { dispatch } = useContext(RestyContext);
+  return dispatch;
+};
+
+export const useHandleSubmit = (e) => {
+  e.preventDefault();
+  const { url, selectedOption, json, name, password, bearerToken } = useGlobalState();
+  const dispatch = useDispatch();
+  dispatch({ type: 'setFetchData', payload: ({
+    url: url,
+    method: selectedOption,
+    json: json,
+    username: name,
+    password: password,
+    bearerToken: bearerToken
+  })
+  });
+};
+export const useHandleChange = ({ target }, toChange) => {
+  const dispatch = useDispatch();
+  dispatch({ type: toChange, payload: target.value });
+};
+
