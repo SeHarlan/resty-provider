@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form component renders Form 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "bearerToken": "",
+      "handleBearerTokenChange": [Function],
+      "handleJsonChange": [Function],
+      "handleNameChange": [Function],
+      "handleOptionChange": [Function],
+      "handlePasswordChange": [Function],
+      "handleSubmit": [Function],
+      "handleUrlChange": [Function],
+      "history": Array [],
+      "json": "",
+      "name": "",
+      "password": "",
+      "result": Array [],
+      "selectedOption": "GET",
+      "url": "",
+    }
+  }
+>
+  <Form />
+</ContextProvider>
+`;

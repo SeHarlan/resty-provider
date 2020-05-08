@@ -1,0 +1,23 @@
+.header {
+  background-color: steelblue;
+  margin: 0;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+}
+.body {
+  width: 100vw;
+  height: 90vh;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 90vh;
+  article {
+    padding: 1rem;
+    padding-left: 0;
+    display: grid;
+    grid-column: 1fr;
+    grid-template-rows: 1fr 3fr;
+  }
+}

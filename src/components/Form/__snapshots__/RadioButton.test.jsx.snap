@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioButton component renders RadioButton 1`] = `
+<Fragment>
+  <input
+    checked={true}
+    id="GET"
+    name="method"
+    onChange={[Function]}
+    type="radio"
+    value="GET"
+  />
+  <label
+    htmlFor="GET"
+  >
+    GET
+  </label>
+</Fragment>
+`;
