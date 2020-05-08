@@ -4,6 +4,7 @@ import FormBody from '../Form/Form';
 import style from './App.css';
 import RestyProvider from '../../RestyProvider';
 import HistoryContainer from '../History/HistoryContainer';
+import Results from '../Results/Results';
 
 export default function App() {
 
@@ -14,7 +15,7 @@ export default function App() {
       <HistoryContainer history={history}/>
       <article>
         <FormBody />
-        {/* <Results result={result}/> */}
+        <Results />
       </article>
     </section>
   </RestyProvider>);

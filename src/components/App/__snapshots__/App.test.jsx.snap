@@ -15,6 +15,7 @@ exports[`App component renders App 1`] = `
     />
     <article>
       <Form />
+      <Results />
     </article>
   </section>
 </RestyProvider>

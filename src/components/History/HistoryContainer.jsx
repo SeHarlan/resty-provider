@@ -30,8 +30,4 @@ const HistoryContainer = () => {
 
 };
 
-HistoryContainer.propTypes = {
-  history: PropTypes.array
-};
-
 export default HistoryContainer;
