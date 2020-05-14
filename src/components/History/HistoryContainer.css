@@ -1,0 +1,27 @@
+.HistoryContainer {
+  background-color: seashell;
+  padding: 1rem;
+  h3 {
+    text-align: center;
+    text-decoration: underline;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    background-color: burlywood;
+    list-style: none;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: .6rem;
+    h2 {
+      font-size: 1rem;
+      margin: 0;
+    }
+    p {
+      font-size: 0.8rem;
+      margin: 0;
+    }
+  }
+}

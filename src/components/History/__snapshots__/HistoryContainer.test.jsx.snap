@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HistoryContainer component renders HistoryContainer 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "dispatch": [Function],
+      "state": Object {
+        "bearerToken": "",
+        "fetchData": null,
+        "history": Array [],
+        "json": "",
+        "name": "",
+        "password": "",
+        "result": Array [],
+        "selectedOption": "GET",
+        "url": "",
+      },
+    }
+  }
+>
+  <HistoryContainer />
+</ContextProvider>
+`;

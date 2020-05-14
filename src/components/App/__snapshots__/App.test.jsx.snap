@@ -1,7 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App component renders App 1`] = `
-<h1>
-  Hello World
-</h1>
+<RestyProvider>
+  <h1
+    className="header"
+  >
+    REST CLIENT
+  </h1>
+  <section
+    className="body"
+  >
+    <HistoryContainer
+      history={History {}}
+    />
+    <article>
+      <Form />
+      <Results />
+    </article>
+  </section>
+</RestyProvider>
 `;

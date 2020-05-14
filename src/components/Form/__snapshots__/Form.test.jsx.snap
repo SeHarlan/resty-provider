@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form component renders Form 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "dispatch": [Function],
+      "state": Object {
+        "bearerToken": "",
+        "fetchData": null,
+        "history": Array [],
+        "json": "",
+        "name": "",
+        "password": "",
+        "result": Array [],
+        "selectedOption": "GET",
+        "url": "",
+      },
+    }
+  }
+>
+  <Form />
+</ContextProvider>
+`;
