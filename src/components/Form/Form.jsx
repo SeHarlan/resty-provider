@@ -13,11 +13,15 @@ const Form = () => {
     bearerToken: bearerTokenInput, 
     selectedOption = 'GET', 
   } = useGlobalState();
+  //TO DO: remove form specific state from Global state and place here in local state for a cleaner Context Provider
 
   const dispatch = useDispatch();
+
+  //dynamically handles all state changes (must call within a func and pass event and the dispatch type)
   const HandleChange = ({ target }, toChange) => {
     dispatch({ type: toChange, payload: target.value });
   };
+
   const HandleSubmit = (e) => {
     e.preventDefault();
 
@@ -32,9 +36,10 @@ const Form = () => {
     });
   };
   
-
+  //Makes radio buttons for all fetch methods
   const radios = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].map(method => (
-    <RadioButton key={method} value={method} selectedOption={selectedOption} onOptionChange={(e) => HandleChange(e, 'setSelectedOption')} />));
+    <RadioButton key={method} value={method} selectedOption={selectedOption} onOptionChange={(e) => HandleChange(e, 'setSelectedOption')} />
+  ));
 
   return (
     <form className={style.Form} onSubmit={HandleSubmit}>
@@ -47,6 +52,7 @@ const Form = () => {
       </section>
       <section className={style.Json}>
         <textarea name="json" value={jsonInput} cols="30" rows="10" onChange={(e) => HandleChange(e, 'setJson')} placeholder="Raw JSON body"></textarea>
+        
         <div className={style.Headers}>
           <h3>Basic Authorization</h3>
           <span>Username: </span><input type="text" name="username" value={usernameInput} onChange={(e) => HandleChange(e, 'setName')} placeholder="Username"/>

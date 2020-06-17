@@ -5,6 +5,8 @@ import { customFetch } from './services/custom';
 
 const RestyContext = createContext();
 
+//TO DO: remove form specific state from Global state and place in Form's local state for a cleaner Context Provider
+
 const initialState = {
   selectedOption: 'GET',
   json: '',
@@ -47,7 +49,7 @@ const RestyProvider = ({ children }) => {
 
   useEffect(() => {
     if(!fetchData) return; 
-    dispatch({ type: 'setResult', payload: ['...Loading (or Nothing Found)'] });
+    dispatch({ type: 'setResult', payload: ['...Loading (or Nothing Found)'] }); //loading state
     customFetch(fetchData).then(res => {
       if(res === []) {
         dispatch({ type: 'setResult', payload: ['No Results Found'] });
@@ -71,6 +73,7 @@ RestyProvider.propTypes = {
 
 export default RestyProvider;
 
+//exports getters and setters for easier access to context provider
 export const useGlobalState = () => {
   const { state } = useContext(RestyContext);
   return state;
@@ -80,22 +83,5 @@ export const useDispatch = () => {
   return dispatch;
 };
 
-export const useHandleSubmit = (e) => {
-  e.preventDefault();
-  const { url, selectedOption, json, name, password, bearerToken } = useGlobalState();
-  const dispatch = useDispatch();
-  dispatch({ type: 'setFetchData', payload: ({
-    url: url,
-    method: selectedOption,
-    json: json,
-    username: name,
-    password: password,
-    bearerToken: bearerToken
-  })
-  });
-};
-export const useHandleChange = ({ target }, toChange) => {
-  const dispatch = useDispatch();
-  dispatch({ type: toChange, payload: target.value });
-};
+
 
