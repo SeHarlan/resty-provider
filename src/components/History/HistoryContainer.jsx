@@ -17,6 +17,7 @@ HistoryItem.propTypes = {
   url: PropTypes.string.isRequired
 };
 
+//History list made with List HOC
 const HistoryElements = withList(HistoryItem);
 
 const HistoryContainer = () => {
